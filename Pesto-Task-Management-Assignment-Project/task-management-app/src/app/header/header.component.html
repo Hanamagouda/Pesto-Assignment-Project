@@ -1,0 +1,21 @@
+
+
+<div class="logo">
+  <a [routerLink]="loggedIn ? '/dashboard' : '/register'" routerLinkActive="active">Task Management</a>
+</div>
+
+<div class="header">
+  <div class="nav-links">
+    <ul *ngIf="loggedIn; else loginLinks">
+      <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+      <li><a routerLink="/view-profile" routerLinkActive="active">Profile</a></li>
+      <li><a (click)="logout()">Logout</a></li>
+    </ul>
+    <ng-template #loginLinks>
+      <ul>
+        <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+        <li><a routerLink="/register" routerLinkActive="active">Register</a></li>
+      </ul>
+    </ng-template>
+  </div>
+</div>

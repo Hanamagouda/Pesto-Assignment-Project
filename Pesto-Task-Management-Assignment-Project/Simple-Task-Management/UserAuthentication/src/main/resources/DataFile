@@ -1,0 +1,15 @@
+
+http://localhost:8080/api/v2/register
+{
+"customerEmailId": "hmgoudar.11@gmail.com",
+    "customerName": "Hanamagouda Goudar",
+    "customerPassword": "Hmgoudar@11",
+    "customerPhoneNumber": "7676288611"
+}
+
+http://localhost:8080/api/v2/login
+
+{
+    "customerEmailId": "hmgoudar.11@gmail.com",
+    "customerPassword": "Hmgoudar@11"
+   }

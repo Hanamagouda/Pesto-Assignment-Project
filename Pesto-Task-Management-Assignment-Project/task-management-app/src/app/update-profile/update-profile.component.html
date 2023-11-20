@@ -1,0 +1,52 @@
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Update Profile</h2>
+            <form [formGroup]="updatedProfileForm" (ngSubmit)="updateProfile()">
+            
+              <div class="form-group">
+                <label for="customerName">Customer Name</label>
+                <input type="text" id="customerName" formControlName="customerName" class="form-control"
+                       [ngClass]="{'is-invalid': updatedProfileForm.get('customerName')?.invalid && (updatedProfileForm.get('customerName')?.dirty || updatedProfileForm.get('customerName')?.touched)}">
+                <div *ngIf="updatedProfileForm.get('customerName')?.hasError('required') && (updatedProfileForm.get('customerName')?.dirty || updatedProfileForm.get('customerName')?.touched)"
+                     class="invalid-feedback">
+                  Customer Name is required.
+                </div>
+              </div>
+  
+          
+              <div class="form-group">
+                <label for="customerContactNumber">Contact Number</label>
+                <input type="text" id="customerContactNumber" formControlName="customerContactNumber" class="form-control"
+                       [ngClass]="{'is-invalid': updatedProfileForm.get('customerContactNumber')?.invalid && (updatedProfileForm.get('customerContactNumber')?.dirty || updatedProfileForm.get('customerContactNumber')?.touched)}">
+                <div *ngIf="updatedProfileForm.get('customerContactNumber')?.hasError('required') && (updatedProfileForm.get('customerContactNumber')?.dirty || updatedProfileForm.get('customerContactNumber')?.touched)"
+                     class="invalid-feedback">
+                  Contact Number is required.
+                </div>
+                <div *ngIf="updatedProfileForm.get('customerContactNumber')?.hasError('pattern') && (updatedProfileForm.get('customerContactNumber')?.dirty || updatedProfileForm.get('customerContactNumber')?.touched)"
+                     class="invalid-feedback">
+                  Invalid contact number.
+                </div>
+              </div>
+  
+          
+              <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" formControlName="address" class="form-control"
+                       [ngClass]="{'is-invalid': updatedProfileForm.get('address')?.invalid && (updatedProfileForm.get('address')?.dirty || updatedProfileForm.get('address')?.touched)}">
+                <div *ngIf="updatedProfileForm.get('address')?.hasError('required') && (updatedProfileForm.get('address')?.dirty || updatedProfileForm.get('address')?.touched)"
+                     class="invalid-feedback">
+                  Address is required.
+                </div>
+              </div>
+  
+              <button type="submit" class="btn btn-primary" [disabled]="updatedProfileForm.invalid">Update Profile</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

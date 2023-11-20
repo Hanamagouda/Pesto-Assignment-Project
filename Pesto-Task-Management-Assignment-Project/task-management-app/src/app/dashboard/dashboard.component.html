@@ -1,0 +1,62 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Customer Tasks</h2>
+
+          <!-- Status Filter -->
+          <div class="mt-3">
+            <label for="statusFilter">Filter by Status:</label>
+            <select id="statusFilter" [(ngModel)]="selectedStatus" (ngModelChange)="updateFilter()" class="form-control">
+              <option value="all">All</option>
+              <option value="TODO">To Do</option>
+              <option value="IN_PROGRESS">In Progress</option>
+              <option value="DONE">Done</option>
+            </select>
+          </div>
+
+          <!-- Displaying Filtered Tasks -->
+          <div *ngIf="filteredTasks && filteredTasks.length > 0" class="mt-4">
+            <div class="row">
+              <div *ngFor="let task of filteredTasks" class="col-md-4 mb-3">
+                <div class="card task-card">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ task.title }}</h5>
+                    <p class="card-text">{{ task.description }}</p>
+                    <p class="card-text"><strong>Status:</strong> {{ task.status }}</p>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-between mt-3">
+                      <a routerLink="/view-task/{{ customerEmailId }}/{{ task.taskId }}" class="btn btn-primary">
+                        View Task
+                      </a>
+
+                      <a routerLink="/update-task/{{ customerEmailId }}/{{ task.taskId }}" class="btn btn-success">
+                        Update Task
+                      </a>
+
+                      <button (click)="deleteTask(task.taskId)" class="btn btn-danger">
+                        Delete Task
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Create New Task Button -->
+          <a routerLink="/task-creation/{{ customerEmailId }}" class="btn btn-danger mt-3">
+            Create New Task
+          </a>
+
+          <!-- No Tasks Message -->
+          <div *ngIf="!filteredTasks || filteredTasks.length === 0" class="mt-3">
+            <p>No tasks found for this customer with the selected status. <br>Click the button above to create a new task.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+
+
+<div class="registration-banner">
+  <div class="banner-content">
+    <h2>Impressive Task Manager</h2>
+    <p>Supercharge your productivity with our cutting-edge task-management application. Achieve your goals effortlessly and stay organized like never before!</p>
+  </div>
+</div>
+
+
+<div class="wrapper">
+  <div class="text-center mt-4 name">
+    <div class="header">
+      <h2>Task Manager</h2>
+      <p>Organize your life with our powerful task-management application. Stay focused and achieve your goals!</p>
+    </div>
+  </div>
+  <form [formGroup]="loginForm" class="p-3 mt-3" (ngSubmit)="onSubmit()">
+    <div class="form-field">
+      <input type="text" formControlName="customerEmailId" placeholder="Username" required
+        pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Enter a valid email address" />
+      <div *ngIf="customerEmailId?.invalid && (customerEmailId?.dirty || customerEmailId?.touched)"
+        class="error-message">
+        <div *ngIf="customerEmailId?.errors?.['required']">Email is required.</div>
+        <div *ngIf="customerEmailId?.errors?.['pattern']">Enter a valid email address.</div>
+      </div>
+    </div>
+    <div class="form-field">
+      <input type="password" formControlName="customerPassword" placeholder="Password" required
+        pattern="^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$"
+        title="Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character." />
+      <div *ngIf="customerPassword?.invalid && (customerPassword?.dirty || customerPassword?.touched)"
+        class="error-message">
+        <div *ngIf="customerPassword?.errors?.['required']">Password is required.</div>
+        <div *ngIf="customerPassword?.errors?.['pattern']">
+          Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one number,
+          and one special character.
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn mt-3" [disabled]="!loginForm.valid">Login</button>
+  </form>
+  <div class="text-center fs-6">
+    <p style="color: whitesmoke;">Don't have an account? <a href="#">Sign up</a></p>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Customer Profile</h2>
+            <div *ngIf="customer">
+              <div class="mb-3">
+                <strong>Email:</strong> {{ customer.customerEmailId }}
+              </div>
+              <div class="mb-3">
+                <strong>Name:</strong> {{ customer.customerName }}
+              </div>
+              <div class="mb-3">
+                <strong>Contact Number:</strong> {{ customer.customerContactNumber }}
+              </div>
+              <div class="mb-3">
+                <strong>Address:</strong> {{ customer.address }}
+              </div>
+              <div *ngIf="customer.tasks && customer.tasks.length > 0">
+                <h4 class="mt-4">Tasks:</h4>
+                <ul class="list-group">
+                  <li class="list-group-item" *ngFor="let task of customer.tasks">
+                    <strong>{{ task.title }}</strong>
+                    <p>{{ task.description }}</p>
+                    <span class="badge badge-info">{{ task.status }}</span>
+                  </li>
+                </ul>
+              </div>
+              <button routerLink="/update-profile" class="btn btn-primary ml-auto">
+                Edit Profile
+                <mat-icon>edit_profile</mat-icon>
+              </button>
+            </div>
+            <div *ngIf="!customer">
+              <p>Customer not found.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

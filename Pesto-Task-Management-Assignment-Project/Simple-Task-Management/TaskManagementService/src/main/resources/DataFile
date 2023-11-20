@@ -1,0 +1,71 @@
+
+Register Customer (POST)
+URL: POST http://localhost:8081/api/v1/register
+Body:
+{
+  "customerEmailId": "johny@example.com",
+  "customerPassword": "password123",
+  "customerName": "Johny",
+  "customerContactNumber": "1234567890",
+  "address": "123 Main Street"
+}      fine
+
+login - generating token
+
+Update Customer (PUT)
+URL: PUT http://localhost:8081/api/v1/update/johny@example.com
+Body:
+{
+  "customerPassword": "newpassword",
+  "customerName": "Updated Name",
+  "customerContactNumber": "9876543210",
+  "address": "456 Oak Avenue"
+}   fine
+
+Get Customer by Email ID (GET)
+URL: GET
+http://localhost:8081/api/v1/user/johny@example.com   - fine
+
+Add Task to Customer:
+URL: POST
+http://localhost:8081/api/v1/user/johny@example.com/tasks
+Replace {customerEmailId} with the actual customer email ID.
+Body:
+{
+  "taskId": "task123",
+  "title": "Task Title",
+  "description": "Task Description",
+  "status": "TODO"
+}                                          fine
+
+Get Tasks by Customer Email ID (GET)
+URL: GET
+http://localhost:8081/api/v1/user/johny@example.com/tasks          fine
+
+Get Customer by ID (GET)
+customerId is MongoDB Object id
+URL: GET
+http://localhost:8081/api/v1/user/id/{customerId}       fine
+
+Update Task for Customer:
+URL: PUT
+http://localhost:8081/api/v1/user/{customerEmailId}/tasks/{taskId}
+Replace {customerEmailId} with the actual customer email ID.
+Replace {taskId} with the actual task ID.
+Body :
+{
+  "title": "Updated Task Title",
+  "description": "Updated Task Description",
+  "status": "IN_PROGRESS"
+}                          fine
+
+Delete Task from Customer:
+URL: DELETE
+http://localhost:8081/api/v1/user/{emailId}/tasks/{taskId}
+Replace {emailId} with the actual customer email ID.
+Replace {taskId} with the actual task ID.
+                                           fine
+
+getTaskByCustomerIdAndTaskId
+GET
+http://localhost:8081/api/v1/user/{customerEmailId}/tasks/{taskId}

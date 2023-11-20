@@ -1,0 +1,70 @@
+CustomerService interface :
+List<Customer> getCustomersByTasksStatus(TaskStatus status);
+ @Override
+    public List<Customer> getCustomersByTasksStatus(TaskStatus status) {
+        // Use the repository to find customers with tasks having the specified status
+
+        // Return the list of customers
+        return customerRepository.findByTasks_Status(status);
+    }
+    @GetMapping("/user/tasks/{status}")
+        public ResponseEntity<List<Customer>> getCustomersByTasksStatus(@PathVariable TaskStatus status) {
+            List<Customer> customers = customerService.getCustomersByTasksStatus(status);
+            return ResponseEntity.ok(customers);
+        }
+
+
+
+    Optional<Task> getTaskByCustomerIdAndTaskId(String customerEmailId, String taskId)
+                throws CustomerNotFoundException, TaskNotFoundException;
+     @Override
+        public Optional<Task> getTaskByCustomerIdAndTaskId(String customerEmailId, String taskId) throws CustomerNotFoundException, TaskNotFoundException {
+            // Check if the customer exists
+            Customer customer = customerRepository.findByCustomerEmailId(customerEmailId);
+            if (customer == null) {
+                throw new CustomerNotFoundException("Customer with email address " + customerEmailId + " not found.");
+            }
+
+            // Find the task by ID using a loop
+            List<Task> tasks = customer.getTasks();
+            for (Task task : tasks) {
+                if (task.getTaskId().equals(taskId)) {
+                    return Optional.of(task);
+                }
+            }
+
+            // If the loop completes without finding the task, throw an exception
+            throw new TaskNotFoundException("Task with ID " + taskId + " not found for customer with email " + customerEmailId);
+        }
+     @GetMapping("/user/{customerEmailId}/tasks/{taskId}")
+     public ResponseEntity<Optional<Task>> getTaskByCustomerIdAndTaskId(
+            @PathVariable String customerEmailId, @PathVariable String taskId) {
+        try {
+            Optional<Task> task = customerService.getTaskByCustomerIdAndTaskId(customerEmailId, taskId);
+            return ResponseEntity.ok(task);
+        } catch (CustomerNotFoundException | TaskNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+    //    Optional<Customer> getCustomerById(String customerId) throws CustomerNotFoundException;
+    //    @Override
+    //    public Optional<Customer> getCustomerById(String customerId) throws CustomerNotFoundException {
+    //        Optional<Customer> customer = customerRepository.findById(customerId);
+    //        if (customer.isPresent()) {
+    //            return customer;
+    //        } else {
+    //            throw new CustomerNotFoundException("Customer with ID " + customerId + " not found.");
+    //        }
+    //    }
+
+    //    @GetMapping("/user/id/{customerId}")
+    //    public ResponseEntity<?> getCustomerById(@PathVariable String customerId) {
+    //        try {
+    //            Optional<Customer> customer = customerService.getCustomerById(customerId);
+    //            return ResponseEntity.ok(customer);
+    //        } catch (CustomerNotFoundException e) {
+    //            return ResponseEntity.notFound().build();
+    //        }
+    //    }

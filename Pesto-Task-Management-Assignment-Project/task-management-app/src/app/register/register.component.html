@@ -1,0 +1,83 @@
+
+
+<div class="registration-banner">
+    <div class="banner-content">
+        <h2>Ready to take control of your tasks?</h2>
+        <p>Register now and experience the power of our task-management!</p>
+    </div>
+</div>
+
+
+<div class="wrapper">
+    <div class="text-center mt-4 name">
+        <div class="header">
+            <h2>Task Manager</h2>
+        </div>
+    </div>
+    <form [formGroup]="registration" class="p-3 mt-3" (ngSubmit)="onSubmit()">
+        <div class="form-field">
+            <input type="text" formControlName="customerName" placeholder="Your Name" required
+                pattern="^[a-zA-Z]{4,20}$" />
+            <div *ngIf="customerName?.invalid && (customerName?.dirty || customerName?.touched)" class="error-message">
+                <div *ngIf="customerName?.errors?.['required']">Your Name is required.</div>
+                <div *ngIf="customerName?.errors?.['pattern']">Enter a valid name (4-20 characters, only letters).</div>
+            </div>
+        </div>
+        <div class="form-field">
+            <input type="text" formControlName="customerEmailId" placeholder="Your Email" required
+                pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Enter a valid email address" />
+            <div *ngIf="customerEmailId?.invalid && (customerEmailId?.dirty || customerEmailId?.touched)"
+                class="error-message">
+                <div *ngIf="customerEmailId?.errors?.['required']">Email is required.</div>
+                <div *ngIf="customerEmailId?.errors?.['pattern']">Enter a valid email address.</div>
+            </div>
+        </div>
+        <div class="form-field">
+            <input type="password" formControlName="customerPassword" placeholder="Password" required
+                pattern="^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$"
+                title="Password must contain at least 8 characters, including one uppercase letter, one lowercase letter, one number, and one special character." />
+            <div *ngIf="customerPassword?.invalid && (customerPassword?.dirty || customerPassword?.touched)"
+                class="error-message">
+                <div *ngIf="customerPassword?.errors?.['required']">Password is required.</div>
+                <div *ngIf="customerPassword?.errors?.['pattern']">
+                    Password must contain at least 8 characters, including one uppercase letter, one lowercase letter,
+                    one number, and one special character.
+                </div>
+            </div>
+        </div>
+        <div class="form-field">
+            <input type="password" formControlName="confirmPassword" placeholder="Repeat your password" required
+                pattern="^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$" />
+            <div *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)"
+                class="error-message">
+                <div *ngIf="confirmPassword?.errors?.['required']">Confirm Password is required.</div>
+                <div *ngIf="registration?.errors?.['passwordMismatch']">Passwords do not match.</div>
+            </div>
+        </div>
+        <div class="form-field">
+            <input type="text" formControlName="customerContactNumber" placeholder="Contact Number" required
+                minlength="10" pattern="^[789]\d{9,9}$" />
+            <div *ngIf="customerContactNumber?.invalid && (customerContactNumber?.dirty || customerContactNumber?.touched)"
+                class="error-message">
+                <div *ngIf="customerContactNumber?.errors?.['required']">Contact Number is required.</div>
+                <div *ngIf="customerContactNumber?.errors?.['minlength']">Contact Number must be at least 10 digits.
+                </div>
+                <div *ngIf="customerContactNumber?.errors?.['pattern']">Enter a valid contact number starting with 7, 8,
+                    or 9.</div>
+            </div>
+        </div>
+        <div class="form-field">
+            <input type="text" formControlName="address" placeholder="Your Address" required minlength="10"
+                maxlength="30" />
+            <div *ngIf="address?.invalid && (address?.dirty || address?.touched)" class="error-message">
+                <div *ngIf="address?.errors?.['required']">Address is required.</div>
+                <div *ngIf="address?.errors?.['minlength']">Address must be at least 10 characters long.</div>
+                <div *ngIf="address?.errors?.['maxlength']">Address must not exceed 30 characters.</div>
+            </div>
+        </div>
+        <button type="submit" class="btn mt-3" [disabled]="!registration.valid">Register</button>
+    </form>
+    <div class="text-center fs-6">
+        <p style="color: azure;">Already have an account? <a style="font-size: larger;color:blue;"  routerLink="/login" href="#">Login</a></p>
+    </div>
+</div>
